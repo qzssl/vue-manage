@@ -1,26 +1,36 @@
 <template>
   <div id="app">
-    
+    <left-menu></left-menu>
+    <div class="right-content">
+      <vheader></vheader>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Vheader from './components/common/Header.vue'
+import LeftMenu from './components/common/Menu.vue'
 export default {
   name: 'app',
-  components: {
-    
-  }
+  components: { Vheader, LeftMenu },
+  data() {
+    return {
+      searchCriteria: '',
+      breadcrumbItems: ['导航一']
+    }
+  },
+
+  methods: {}
 }
 </script>
 
-<style>
+<style scope>
+/* @import './style/common.css'; */
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  height: 100%;
+}
+.right-content {
+  flex: 1;
 }
 </style>
