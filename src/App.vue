@@ -3,6 +3,9 @@
     <left-menu></left-menu>
     <div class="right-content">
       <vheader></vheader>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
