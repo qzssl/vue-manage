@@ -16,13 +16,7 @@ import LeftMenu from './components/common/Menu.vue'
 export default {
   name: 'app',
   components: { Vheader, LeftMenu },
-  data() {
-    return {
-      searchCriteria: '',
-      breadcrumbItems: ['导航一']
-    }
-  },
-
+  data() {},
   methods: {}
 }
 </script>

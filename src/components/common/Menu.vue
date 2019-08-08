@@ -3,7 +3,7 @@
     <el-row class="el-menu-row">
       <el-col :span="12" class="el-menu-col">
         <el-menu
-          default-active="2"
+          :default-active="defaultActive"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -12,7 +12,7 @@
           active-text-color="#ffd04b"
           router
         >
-          <el-menu-item index="page">
+          <el-menu-item index="home">
             <i class="el-icon-menu"></i>首页
           </el-menu-item>
 
@@ -45,12 +45,19 @@
           </el-submenu>
           <el-submenu index="4">
             <template slot="title">
+              <i class="el-icon-edit"></i>
+              <span>编辑</span>
+            </template>
+            <el-menu-item index="textEdit">文本编辑</el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
               <i class="el-icon-setting"></i>
               <span>设置</span>
             </template>
             <el-menu-item index="setting">管理员设置</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
+          <el-submenu index="6">
             <template slot="title">
               <i class="el-icon-warning"></i>
               <span>说明</span>
@@ -66,6 +73,13 @@
 <script>
 export default {
   components: {},
+  computed: {
+    defaultActive: function() {
+      //浏览器刷新后，仍然可以定位到之前选中的路由
+      window.console.log(this.$route)
+      return this.$route.path.replace('/', '')
+    }
+  },
   methods: {
     handleOpen(key, keyPath) {
       window.console.log(key, keyPath)
