@@ -15,9 +15,7 @@ import Vheader from './components/common/Header.vue'
 import LeftMenu from './components/common/Menu.vue'
 export default {
   name: 'app',
-  components: { Vheader, LeftMenu },
-  data() {},
-  methods: {}
+  components: { Vheader, LeftMenu }
 }
 </script>
 

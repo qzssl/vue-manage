@@ -6,38 +6,48 @@
         <el-breadcrumb-item v-for="(item,index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
+    <div class="right">
+      <el-dropdown trigger="click" placement="bottom-start" menu-align="start">
+        <img src="http://elm.cangdu.org/img/16c6bd4ff9a50556.png" />
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>首页</el-dropdown-item>
+          <el-dropdown-item>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: {},
-  data() {
-    return {
-      levelList: null
-    }
-  },
-  methods: {
-    getBreadcrumb() {
-      window.console.log(this.$route.matched)
-      let matched = this.$route.matched.filter(item => item.meta.title)
-      this.levelList = matched
-    }
-  },
-  watch: {
-    $route() {
-      window.console.log(this.$route.meta)
-      this.getBreadcrumb()
-    }
-  },
-  mounted() {
-    this.getBreadcrumb()
-  },
-  components: {}
 }
 </script>
 <style scoped>
 .header {
-  flex: 1;
+  display: flex;
+  height: 60px;
+  background-color: #eff2f7;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+img {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  margin-right: 37px;
+  cursor: pointer;
+}
+.el-dropdown-menu {
+  min-width: 100px;
+  margin: 5px 0;
+  border: 1px solid #d1dbe5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+}
+
+.popper__arrow {
+  display: none;
 }
 </style>

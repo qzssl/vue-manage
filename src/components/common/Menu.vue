@@ -5,8 +5,6 @@
         <el-menu
           :default-active="defaultActive"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -76,18 +74,10 @@ export default {
   computed: {
     defaultActive: function() {
       //浏览器刷新后，仍然可以定位到之前选中的路由
-      window.console.log(this.$route)
       return this.$route.path.replace('/', '')
     }
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      window.console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      window.console.log(key, keyPath)
-    }
-  }
+  methods: {}
 }
 </script>
 <style scoped>

@@ -46,7 +46,7 @@ const routes = [
   {
     path: '/home',
     component: home,
-    meta: {}
+    meta: []
   },
   {
     path: '/userList',
