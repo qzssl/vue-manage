@@ -80,7 +80,7 @@ export default {
 .menu,
 .el-menu-row,
 .el-menu-col {
-  height: 100%;
+  min-height: 100%;
 }
 .el-menu-vertical-demo {
   height: 100%;

@@ -6,15 +6,13 @@
         <el-breadcrumb-item v-for="(item,index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="right">
-      <el-dropdown trigger="click" placement="bottom-start" menu-align="start">
-        <img src="http://elm.cangdu.org/img/16c6bd4ff9a50556.png" />
+    <el-dropdown menu-align="start">
+        <img class="avator" src="http://elm.cangdu.org/img/16c6bd4ff9a50556.png" />
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>首页</el-dropdown-item>
           <el-dropdown-item>退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-    </div>
   </div>
 </template>
 
@@ -32,7 +30,7 @@ export default {
   justify-content: space-between;
   padding-left: 20px;
 }
-img {
+.avator {
   height: 36px;
   width: 36px;
   border-radius: 50%;

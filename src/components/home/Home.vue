@@ -57,8 +57,6 @@
 import chart from '../chart/Chart.vue'
 import {userCount,orderCount,adminCount,getUserCount,getOrderCount,getAdminCount} from '../api/api'
 import dtime from 'time-formater'
-import { Promise } from 'q';
-
 
 export default {
   components: {chart},
