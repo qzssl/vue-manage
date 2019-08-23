@@ -48,3 +48,6 @@ html {
 img {
   border: none;
 }
+.el-table td, .el-table th{
+  height: 40px;
+}

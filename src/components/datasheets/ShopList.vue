@@ -5,6 +5,7 @@
   展开行可访问的属性与使用自定义列模板时的 Scoped slot 相同 -->
   <el-table 
     :data="tableData"
+    :header-cell-style="{background:'#eef1f6',color:'#606266'}"
     style="width:100%">
     <el-table-column 
       type="expand">

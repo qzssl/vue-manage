@@ -60,9 +60,33 @@ export function  foodCategory(){
   })
 }
 
+//根据种类id获取相关信息
+export const getCategoryById = (id) => {
+  const url = `${config.baseUrl}/shopping/v2/menu/${id}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//根据店铺id获取种类
+export const getMenu = (id) => {
+  const url = `${config.baseUrl}/shopping/v2/menu?restaurant_id=${id}&allMenu=true`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
 //店铺列表
 export function getShopList(latitude,longitude,offset,limit){
   const url = `${config.baseUrl}/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=${limit}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//根据id获取店铺详细信息
+export const getShopDetailById = (id) => {
+  const url = `${config.baseUrl}/shopping/restaurant/${id}`
   return axios.get(url).then(res=>{
     return Promise.resolve(res.data)
   })
@@ -94,6 +118,41 @@ export const deleteShop = (id) => {
   })
 }
 
+//获取食品数量
+
+export const getFoodsCount = (id) => {
+  const url = `${config.baseUrl}/shopping/v2/foods/count?restaurant_id=${id}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//获取食品列表
+export const getFoods = (offset,limit,restaurant_id) => {
+  const url = `${config.baseUrl}/shopping/v2/foods?offset=${offset}&limit=${limit}&restaurant_id=${restaurant_id}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//更新食品信息
+export const updateFood = (data) => {
+  const url = `${config.baseUrl}/shopping/v2/updatefood`
+  return axios.post(url,{
+    data
+  }).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//删除食品
+export const deleteFood = (food_id) => {
+  const url = `${config.baseUrl}/shopping/v2/food/${food_id}`
+  return axios.delete(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
 //获取定位城市
 export const cityGuess = () => {
   const url = `${config.baseUrl}/v1/cities?type=guess`
@@ -110,3 +169,4 @@ export function searchplace(cityid,value){
     return Promise.resolve(res.data)
   })
 }
+
