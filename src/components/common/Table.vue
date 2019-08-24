@@ -41,7 +41,7 @@ export default {
     handleCurrentChange(val){
       this.currentPage = val
       this.offset = (val-1)*this.limit
-      this.$emit('handleCurrentChange',this.currentPage,this.offset)
+      this.$emit('handleCurrentChange',this.offset)
     }
 
   }

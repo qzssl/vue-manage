@@ -108,8 +108,7 @@ import { getOrderCount, getOrderList, getShopDetailById, getUserInfo, getAddress
             this.expendRow.push(row.index);
         })
       },
-      handleCurrentChange(currentPage,offset){
-        this.currentPage = currentPage;
+      handleCurrentChange(offset){
         this.offset = offset;
         this.getOrders()
       }

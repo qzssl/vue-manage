@@ -66,20 +66,28 @@ export const getOrderList = (offset,limit,restaurant_id) => {
   })
 }
 
-//新增管理员
+//新增管理员数量
 export function adminCount(today){
   const url = `${config.baseUrl}/statis/admin/${today}/count`
   return axios.get(url).then((res)=>{
     return Promise.resolve(res.data)
   })
 }
-//获取管理员
+//获取管理员数量
 export function getAdminCount(){
   const url = `${config.baseUrl}/admin/count`
   return axios.get(url).then((res)=>{
     return Promise.resolve(res.data)
   })
 }
+
+//管理员列表
+export const getAdminList = (offset,limit) => {
+  const url = `${config.baseUrl}/admin/all?offset=${offset}&limit=${limit}`
+  return axios.get(url).then((res)=>{
+    return Promise.resolve(res.data)
+  })
+} 
 
 //种类列表
 export function  foodCategory(){
