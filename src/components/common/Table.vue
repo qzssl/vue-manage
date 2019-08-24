@@ -26,13 +26,12 @@ export default {
   props:{
     tableData:{type:Array,default:()=> {return []}},
     count:{type:Number,default:0},
-    expendRow:{type:Array,default:()=>{return []}}
+    limit:{type:Number,default:5}
   },
   data(){
     return {
       currentPage:1,
       offset:0,
-      limit:5,
     }
   },
   methods:{

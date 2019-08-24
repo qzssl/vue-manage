@@ -3,6 +3,7 @@
     <table-form 
            v-bind:tableData="tableData"
            v-bind:count='count'
+           v-bind:limit="limit"
            @expandChange='expandChange'
            v-on:handleCurrentChange='handleCurrentChange'>
       <el-table-column type="expand">
