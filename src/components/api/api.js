@@ -2,7 +2,7 @@ import axios from 'axios'
 import '../../../config/config'
 import config from '../../../config/config';
 
-//新增用户
+//新增用户数量
 export function userCount(today){
   const url = `${config.baseUrl}/statis/user/${today}/count`
   return axios.get(url).then((res)=>{
@@ -23,7 +23,27 @@ export function getUserList(offset,limit){
     return res.data
   })
 }
-//新增订单
+
+//获取用户信息
+export const getUserInfo = (id) => {
+  const url = `${config.baseUrl}/v1/user/${id}`
+  return axios.get(url).then((res)=>{
+    return res.data
+  })
+}
+
+/**
+ * 获取地址信息
+ */
+
+export const getAddressById = address_id => {
+  const url = `${config.baseUrl}/v1/addresse/${address_id}`
+  return axios.get(url).then((res)=>{
+    return res.data
+  })
+}
+
+//新增订单数量
 export function orderCount(today){
   const url = `${config.baseUrl}/statis/order/${today}/count`
   return axios.get(url).then((res)=>{
@@ -37,6 +57,15 @@ export function getOrderCount(){
     return Promise.resolve(res.data) 
   })
 }
+
+//获取订单列表
+export const getOrderList = (offset,limit,restaurant_id) => {
+  const url = `${config.baseUrl}/bos/orders?offset=${offset}&limit=${limit}&restaurant_id=${restaurant_id}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
 //新增管理员
 export function adminCount(today){
   const url = `${config.baseUrl}/statis/admin/${today}/count`

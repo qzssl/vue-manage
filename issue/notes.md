@@ -145,7 +145,18 @@ const routes = [
       },
     }
   }
-
-      
-
+```
+#### 强制组件重新渲染
+>当table展开行时(展开行数据只有在展开时请求数据)，点击分页，由于上一页没有收起展开行，导致展开行没有数据，这时需要重新渲染组件
+>解决：使用key,当点击分页时，当前组件重新渲染
+```
+<el-table
+  :data="tableData"
+  :key="currentPage"
+  :row-key="row => row.index"
+  @expand-change = "expandChange"
+  :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+  style="width:100%">
+  <slot></slot>
+</el-table>
 ```

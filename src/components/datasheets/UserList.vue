@@ -75,7 +75,7 @@ export default {
       })
     },
     handleCurrentChange(val){
-      window.console.log(val)
+      // window.console.log(val)
       this.currentPage = val;
       this.offset = (val-1)*this.limit;
       this.getUsers();
