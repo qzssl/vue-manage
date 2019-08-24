@@ -36,7 +36,6 @@ export default {
   },
   methods:{
     expandChange(row,expandedRows){
-      window.console.log(row,expandedRows)
       this.$emit('expandChange',row,expandedRows)
     },
     handleCurrentChange(val){

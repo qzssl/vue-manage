@@ -62,10 +62,6 @@ import { getOrderCount, getOrderList, getShopDetailById, getUserInfo, getAddress
       this.restaurant_id = this.$route.query.restaurant_id;
       this.initData()
     },
-    updated(){
-      window.console.log("跟新后",this.tableData)
-
-    },
     methods: {
       async initData(){
         try{
@@ -82,9 +78,7 @@ import { getOrderCount, getOrderList, getShopDetailById, getUserInfo, getAddress
       },
       async getOrders(){
         const Orders = await getOrderList(this.offset, this.limit,this.restaurant_id);
-        // window.console.log(Orders)
         this.tableData = [];
-        // this.tableData = [...Orders]
         Orders.forEach((item, index) => {
             const tableData = {};
             tableData.id = item.id;
@@ -98,7 +92,6 @@ import { getOrderCount, getOrderList, getShopDetailById, getUserInfo, getAddress
         })
       },
       expandChange(row,expandedRows){
-        window.console.log("fu:",row,expandedRows)
         if(expandedRows){
           this.getExpandRowData(row);
         }else{
@@ -114,7 +107,6 @@ import { getOrderCount, getOrderList, getShopDetailById, getUserInfo, getAddress
         this.$nextTick(() => {
             this.expendRow.push(row.index);
         })
-        window.console.log(restaurant,userInfo,addressInfo)
       },
       handleCurrentChange(currentPage,offset){
         this.currentPage = currentPage;
