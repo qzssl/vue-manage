@@ -204,7 +204,7 @@ export default {
           })
           this.categoryOptions.push(addnew)
         }
-    })
+     })
     },
     handleEdit(index, row) {
       this.selectTable = row;

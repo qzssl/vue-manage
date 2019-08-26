@@ -149,7 +149,7 @@ const routes = [
 #### 强制组件重新渲染
 >当table展开行时(展开行数据只有在展开时请求数据)，点击分页，由于上一页没有收起展开行，导致展开行没有数据，这时需要重新渲染组件
 >解决：使用key,当点击分页时，当前组件重新渲染
-```
+```html
 <el-table
   :data="tableData"
   :key="currentPage"
@@ -159,4 +159,16 @@ const routes = [
   style="width:100%">
   <slot></slot>
 </el-table>
+```
+#### 父组件传值给子组件，在子组件中值改变了，需要在data设置，否则会报错
+```javascript
+props:{
+  address:{type:String,default:''},
+},
+data(){
+  return {
+    city:{},
+    addressData:this.address
+  }
+},
 ```

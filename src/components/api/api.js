@@ -137,6 +137,16 @@ export const shopCount = () => {
   })
 }
 
+//添加店铺
+export const addShop = (data) => {
+  const url = `${config.baseUrl}/shopping/addShop`
+  return axios.post(url,{
+    data
+  }).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
 //更新店铺信息
 export const updateShop = (data) => {
   const url = `${config.baseUrl}/shopping/updateshop`
