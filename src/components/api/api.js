@@ -32,6 +32,15 @@ export const getUserInfo = (id) => {
   })
 }
 
+//获取用户分布信息
+export const getUserCity = () => {
+  const url = `${config.baseUrl}/v1/user/city/count`
+  return axios.get(url).then((res)=>{
+    return res.data
+  })
+}
+
+
 /**
  * 获取地址信息
  */

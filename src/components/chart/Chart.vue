@@ -1,123 +1,77 @@
 <template>
-  <div class="line">
-    <div ref="line" style="width:90%;height:450px"></div>
+  <div class="chart">
+    <div ref="chartpie" class="chartpie" style="width:90%;height:450px;"></div>
   </div>
 </template>
-
 <script>
-//按需 引入echarts主模块
-import echarts from 'echarts/lib/echarts'
-//引入柱状图和折线图
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/chart/line'
-//引入提示框和标题组件
-import 'echarts/lib/component/tooltip' //气泡提示框，鼠标悬浮交互时的信息提示,常用于展现更详细的数据
-import 'echarts/lib/component/title' //标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题
-import 'echarts/lib/component/legend' //图例，每个图表最多仅有一个图例,表述数据和图形的关联
-import 'echarts/lib/component/toolbox' //辅助工具箱，辅助功能，如添加标线，框选缩放等
-import 'echarts/lib/component/markPoint' //系列中的数据标注内容
-
-export default {
-  components: {},
-  props: ['sevenDate', 'sevenDay'],
-  mounted() {
-    this.myChart = echarts.init(this.$refs.line);
-    this.initData();
-  },
-  methods: {
-    initData() {
-      const colors = ['#5793f3', '#675bba', '#d14a61'];
-      const option = {
-        color:colors,
-        title:{text:'走势图',subtext:''},
-        tooltip:{trigger:'axis'},
-        legend:{data:['新注册用户','新增订单','新增管理员']},
-        toolbox:{
-          show:true,
-          feature:{
-            dataZoom:{yAxisIndex:'none'},
-            dataView:{readOnly:false},
-            magicType:{type:['bar','line']},
-            restore:{},
-          }
-        },
-        //横坐标
-        xAxis:{type:'category',boundaryGap:false,data:this.sevenDay},
-        yAxis:[
-          {
-            type:'value',
-            name:'用户',
-            min:0,
-            max:200,
-            position:'left',
-            axisLine:{lineStyle:{color:'#999'}},
-            axisLabel:{formatter:'{value}'}
-          },
-          {
-            type:'value',
-            name:'订单',
-            min:0,
-            max:200,
-            position:'right',
-            axisLine:{lineStyle:{color:'#999'}},
-            axisLabel:{formatter:'{value}'}
-          }
-        ],
-        series:[
-          {
-            name:'新注册用户',
-            type:'line',
-            data:this.sevenDate[0],
-            yAxisIndex:1,
-            markPoint:{
-              data:[
-                {type:'max',name:'最大值'},
-                {type:'min',name:'最小值'}
-              ]
-            }
-          },
-          {
-            name:'新增订单',
-            type:'line',
-            data:this.sevenDate[1],
-            yAxisIndex: 1,
-            markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-          },
-          {
-            name:'新增管理员',
-            type:'line',
-            data:this.sevenDate[2],
-            yAxisIndex: 1,
-            markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-          }
-        ]
+  import echart from 'echarts/lib/echarts'
+  //引入饼图
+  import 'echarts/lib/chart/pie'
+  import 'echarts/lib/component/title'
+  import 'echarts/lib/component/legend'
+import { getUserCity } from '../api/api';
+  export default {
+    data(){
+      return{
+        pieData:{}
       }
-      this.myChart.setOption(option)
-    }
-  },
-  watch: {
-    sevenDate: function (){
-        this.initData()
     },
-    sevenDay: function (){
+    created(){
+      
+    },
+    mounted(){
+      this.myChart = echart.init(this.$refs.chartpie)
+      this.initData()
+    },
+    methods:{
+      async initData(){
+        try{
+          const res = await getUserCity();
+          if (res.status == 1) {
+            this.pieData = res.user_city;
+          }else{
+            throw new Error(res)
+          }
+        }catch(err){
+          window.console.log('获取用户分布信息失败',err);
+        }
+        const option = {
+          title:{text:'用户分布',subtext:'',x:'center'},
+          tooltip : {trigger: 'item',formatter: "{a} <br/>{b} : {c} ({d}%)"},
+          legend: {orient: 'vertical',left: 'left',data: ['北京','上海','深圳','杭州','其他']},
+          series : [
+            {
+              name: '访问来源',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
+              data:[
+                {value:this.pieData.beijing, name:'北京'},
+                {value:this.pieData.shanghai, name:'上海'},
+                {value:this.pieData.shenzhen, name:'深圳'},
+                {value:this.pieData.hangzhou, name:'杭州'},
+                {value:this.pieData.qita, name:'其他'}
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        }
+        this.myChart.setOption(option)
+      }
+    },
+    watch:{
+      pieData(){
         this.initData()
+      }
     }
   }
-}
 </script>
 <style scoped>
-.line{
-    display: flex;
-    justify-content: center;
-}
+
 </style>

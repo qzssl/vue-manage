@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import chart from '../chart/Chart.vue'
+import chart from '../common/Tendency.vue'
 import {userCount,orderCount,adminCount,getUserCount,getOrderCount,getAdminCount} from '../api/api'
 import dtime from 'time-formater'
 
