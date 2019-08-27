@@ -42,7 +42,7 @@
             <el-input-number v-model="formData.float_minimum_order_amount" :min="0" :max="100"></el-input-number>
           </el-form-item>
           <el-form-item label="营业时间">
-            <el-time-picker
+            <el-time-select
               v-model="formData.startTime"
               :picker-options="{
                 start:'05:30',
@@ -50,8 +50,8 @@
                 end:'23:30'
               }"
               placeholder="起始时间">
-            </el-time-picker>
-            <el-time-picker
+            </el-time-select>
+            <el-time-select
               arrow-control
               v-model="formData.endTime"
               :picker-options="{
@@ -61,7 +61,7 @@
                 minTime: formData.startTime
               }"
               placeholder="结束时间">
-            </el-time-picker>
+            </el-time-select>
           </el-form-item>
           <el-form-item label="上传店铺头像">
             <upload v-bind:actionUrl="actionUrl"></upload>
@@ -236,7 +236,7 @@ export default {
     },
     submitForm(formData){
       this.$refs[formData].validate(async volid=>{
-        window.console.log("验证",volid)
+        // window.console.log("验证",volid)
         if(volid){
           Object.assign(this.formData,{activities:this.activities},
           {category:this.selectedCategory.join('/')})

@@ -172,3 +172,12 @@ data(){
   }
 },
 ```
+#### $msgbox报错： Uncaught (in promise) cancel，因为点击了取消或者是关闭弹窗，但是没有写catch
+>解决：添加catch
+```JavaScript
+this.$msgbox({
+/*... */
+}).catch(err=>{
+  window.console.log(err)
+})
+```

@@ -98,8 +98,8 @@ export function  foodCategory(){
 }
 
 //根据种类id获取相关信息
-export const getCategoryById = (id) => {
-  const url = `${config.baseUrl}/shopping/v2/menu/${id}`
+export const getCategoryById = (category_id) => {
+  const url = `${config.baseUrl}/shopping/v2/menu/${category_id}`
   return axios.get(url).then(res=>{
     return Promise.resolve(res.data)
   })
@@ -109,6 +109,30 @@ export const getCategoryById = (id) => {
 export const getMenu = (id) => {
   const url = `${config.baseUrl}/shopping/v2/menu?restaurant_id=${id}&allMenu=true`
   return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//获取当前店铺食品种类
+export const getCategory = restaurant_id => {
+  const url = `${config.baseUrl}/shopping/getcategory/${restaurant_id}`
+  return axios.get(url).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//添加食品种类
+export const addCategory = data => {
+  const url = `${config.baseUrl}/shopping/addcategory`
+  return axios.post(url,{data}).then(res=>{
+    return Promise.resolve(res.data)
+  })
+}
+
+//添加食品
+export const addFood = data => {
+  const url = `${config.baseUrl}/shopping/addfood`
+  return axios.post(url,{data}).then(res=>{
     return Promise.resolve(res.data)
   })
 }

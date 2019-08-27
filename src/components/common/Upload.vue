@@ -28,7 +28,7 @@ import config from '../../../config/config';
       handleAvatarSuccess(res) {
         if(res.status === 1){
           this.imageUrl = res.image_path;
-          
+          this.$emit('handleAvatarSuccess',res)
         }else{
           this.$message.error('上传图片失败！');
         }
