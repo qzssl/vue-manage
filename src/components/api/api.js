@@ -98,6 +98,15 @@ export const getAdminList = (offset,limit) => {
   })
 } 
 
+//获取管理员信息
+export const adminInfo = () => {
+  const url = `${config.baseUrl}/admin/info`
+  return axios.get(url).then((res)=>{
+    window.console.log(res)
+    return Promise.resolve(res.data)
+  })
+}
+
 //种类列表
 export function  foodCategory(){
   const url = `${config.baseUrl}/shopping/v2/restaurant/category`

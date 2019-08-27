@@ -44,6 +44,11 @@ const chart = () =>
 
 const routes = [
   {
+    path:'/',
+    component:home,
+    meta:[]
+  },
+  {
     path: '/home',
     component: home,
     meta: []

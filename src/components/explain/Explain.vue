@@ -1,5 +1,7 @@
 <template>
-  <div class="explain">explain</div>
+  <div class="explain">
+    <p>管理后台</p>
+  </div>
 </template>
 
 <script>
@@ -8,4 +10,10 @@ export default {
 }
 </script>
 <style scoped>
+.explain{
+  text-align: center;
+  font-size: 20px;
+  line-height: 20px;
+  margin-top: 20px;
+}
 </style>
