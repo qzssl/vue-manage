@@ -181,3 +181,24 @@ this.$msgbox({
   window.console.log(err)
 })
 ```
+#### 由于props中imageUrl是异步得到的，而 data（）函数只是在初始化的时候会运行一次,所以imgUrl一开始是空，此时需要watch才能得到值。
+```javascript
+export default {
+  props:{
+    actionUrl:{type:String,default:''},
+    imageUrl:{type:String,default:''}
+  },
+  watch:{
+    imageUrl:function(newVal,oldVal){
+      this.imgUrl = newVal;
+    }
+  },
+  data() {
+    return {
+      baseUrl:config.baseUrl,
+      baseImgPath:config.baseImgPath,
+      imgUrl:this.imageUrl,
+    };
+  },
+}
+```

@@ -98,6 +98,7 @@
   text-align: right;
   margin-top: 30px;
 }
+
 </style>
 <style>
 .specs .el-table{
@@ -105,22 +106,20 @@
   border: 1px solid #dfe6ec;
   color: #1f2d3d;
 }
-.demo-ruleForm .el-input-number__decrease{
+.el-input-number__decrease{
   border-left: 1px solid #DCDFE6;
   border-radius: 0%;
   right: 42px;
   left: inherit;
 }
-.demo-ruleForm .el-input__inner{
+
+.el-input-number .el-input__inner{
   padding-left: 15px;
   padding-right: 100px;
   text-align: left;
 }
-.specs-footer{
-  text-align: right;
-  margin-top: 30px;
-}
-.specs .el-form-item{
+
+.el-form-item{
   margin-bottom: 22px;
 }
 </style>

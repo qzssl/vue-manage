@@ -5,29 +5,36 @@
   :show-file-list="false"
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
-  <img v-if="imageUrl" :src="baseImgPath + imageUrl" class="avatar">
+  <img v-if="imgUrl" :src="baseImgPath + imgUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 </el-upload>
 </template>
 <script>
-import '../../../config/config'
 import config from '../../../config/config';
   export default {
     props:{
-      actionUrl:{type:String,default:''}
+      actionUrl:{type:String,default:''},
+      imageUrl:{type:String,default:''}
+    },
+    watch:{
+      //由于props中imageUrl是异步得到的，而 data（）函数只是在初始化的时候会运行一次,
+      //所以imgUrl一开始是空，此时需要watch才能得到值。
+      imageUrl:function(val){
+        this.imgUrl = val;
+      }
     },
     data() {
       return {
         baseUrl:config.baseUrl,
         baseImgPath:config.baseImgPath,
-        imageUrl:''
+        imgUrl:this.imageUrl,
       };
     },
     methods: {
       //成功上传
       handleAvatarSuccess(res) {
         if(res.status === 1){
-          this.imageUrl = res.image_path;
+          this.imgUrl = res.image_path;
           this.$emit('handleAvatarSuccess',res)
         }else{
           this.$message.error('上传图片失败！');

@@ -111,15 +111,10 @@
         ></el-cascader>
       </el-form-item>
       <el-form-item label="商铺图片" label-width="100px">
-        <el-upload
-          class="avatar-uploader"
-          :action="baseUrl + '/v1/addimg/shop'"
-          :show-file-list="false"
-          :on-success="handleServiceAvatarScucess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="selectTable.image_path" :src="baseImgPath + selectTable.image_path" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+        <upload
+          v-bind:actionUrl="actionUrl"
+          v-bind:imageUrl="selectTable.image_path"
+          v-on:handleAvatarSuccess="handleServiceAvatarScucess"></upload>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -131,11 +126,14 @@
 </template>
 <script>
 import { cityGuess, shopCount, getShopList, foodCategory, searchplace, updateShop, deleteShop } from '../api/api';
+import Upload from '../common/Upload.vue'
 import '../../../config/config'
 import config from '../../../config/config';
 export default {
+  components:{ Upload },
   data(){
     return {
+      actionUrl:'/v1/addimg/shop',//上传图片地址
       tableData: [],
       count:0,
       offset:0,
@@ -267,24 +265,8 @@ export default {
     },
     //文件上传成功时的钩子
     handleServiceAvatarScucess(res){
-      if(res.status === 1){
-        this.selectTable.image_path = res.image_path;
-      }else{
-        this.$message.error('上传图片失败！');
-      }
-    },
-    //上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传
-    beforeAvatarUpload(file){
-      const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isRightType) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isRightType && isLt2M;
+      window.console.log(res)
+      this.selectTable.image_path = res.image_path;
     },
     async updateShop(){
       this.dialogVisible = false

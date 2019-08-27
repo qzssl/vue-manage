@@ -77,19 +77,15 @@
             @visible-change="handleChange"
             v-model="selectIndex" 
             placeholder="请选择">
-            <el-option v-for="(item,index) in selectCategory" :key="index" :label="item.name" :value="item.name">{{item.name}}</el-option>
+            <el-option v-for="(item,index) in selectCategory"
+             :key="index" :label="item.name" :value="item.name">{{item.name}}</el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="食品图片">
-          <el-upload
-            :action="baseUrl+'/v1/addimg/food'"
-            :show-file-list="false"
-            :on-success="handleUploadSuccess"
-            :before-upload="beforeUpload"
-            class="avatar-uploader">
-            <img v-if="selectTable.image_path" :src="baseImgPath+selectTable.image_path" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
+          <upload
+            v-bind:actionUrl="'/v1/addimg/food'"
+            v-bind:imageUrl="selectTable.image_path"
+            v-on:handleAvatarSuccess="handleUploadSuccess"></upload>
         </el-form-item>
       </el-form>
       <el-table :data="specs" style="margin-bottom:20px" :row-class-name="tableRowClassName" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
@@ -139,14 +135,12 @@
 
 <script>
 import { getFoodsCount, getFoods, getShopDetailById, getCategoryById, getMenu, updateFood, deleteFood } from '../api/api';
-import '../../../config/config'
-import config from '../../../config/config';
+import Upload from '../common/Upload.vue'
+
 export default {
-  components: {},
+  components: { Upload },
   data() {
     return {
-      baseUrl:config.baseUrl,
-      baseImgPath:config.baseImgPath,
       tableData:[],offset:0,limit:5,
       count:0,
       restaurant_id:null,//店铺id
@@ -157,16 +151,10 @@ export default {
       selectCategory:[],//分类
       selectIndex:null,
       specsVisible:false,//控制规格是否显示
-      specsForm:{
-        specs:'',
-        packing_fee:0,
-        price:20,
-      },//规格
-      specsRules:{
-        specs:[
-           {required:true,message:'请输入规格',trigger:'blur'},
-        ]
-      },//表单规格验证规则
+      specsForm:{specs:'',packing_fee:0,price:20,},//规格
+      specsRules:{//表单规格验证规则
+        specs:[{required:true,message:'请输入规格',trigger:'blur'},]
+      },
     }
   },
   created(){
@@ -235,6 +223,7 @@ export default {
       const category = await getCategoryById(row.category_id)
       this.selectTable = {...row,...{restaurant_name: shop.name, restaurant_address: shop.address,category_name:category.name}}
       this.tableData.splice(row.index,1,{...this.selectTable})
+      // window.console.log(this.selectTable)
       this.$nextTick(() => {
         this.expandRow.push(row.index)
       })
@@ -267,25 +256,7 @@ export default {
     },
     //图片上传成功
     handleUploadSuccess(res){
-      if(res.status === 1){
-        this.selectTable.image_path = res.image_path;
-      }else{
-        this.$message.error("上传图片失败")
-      }
-    },
-    //图片上传之前
-    beforeUpload(file){
-      const isRightType =
-        file.type === "image/jpeg" || file.type === "image/png";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isRightType) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isRightType && isLt2M;
+      this.selectTable.image_path = res.image_path;
     },
     //删除规格
     delectSpecs(index) {
